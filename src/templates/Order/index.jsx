@@ -32,6 +32,17 @@ const childVariants = {
   },
   visible: {
     opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const toppingsVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
   },
 };
 
@@ -39,7 +50,7 @@ export function OrderTemplate({ pizza, setShowModal }) {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setShowModal(true);
-    }, 1000);
+    }, 5000);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -58,7 +69,9 @@ export function OrderTemplate({ pizza, setShowModal }) {
 
       <motion.div variants={childVariants}>
         {pizza.toppings.map((topping) => (
-          <div key={topping}>{topping}</div>
+          <motion.div key={topping} variants={toppingsVariants}>
+            {topping}
+          </motion.div>
         ))}
       </motion.div>
     </S.Wrapper>

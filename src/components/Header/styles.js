@@ -7,7 +7,7 @@ export const Wrapper = styled.header`
   align-items: center;
 `;
 
-export const Logo = styled.svg`
+export const Logo = styled(motion.svg)`
   cursor: pointer;
   width: 80px;
   overflow: visible;

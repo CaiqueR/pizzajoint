@@ -2,7 +2,7 @@ import * as S from "./styles";
 
 import Link from "next/link";
 import { Button } from "../../components/Button/styles";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion, AnimateSharedLayout } from "framer-motion";
 import { buttonVariants } from "../Home";
 
 const containerVariants = {
@@ -28,6 +28,8 @@ const nextVariants = {
 
 export function BaseTemplate({ addBase, pizza }) {
   const bases = ["Classic", "Thin & Crispy", "Thick Crust"];
+
+  console.log("pizza.base :>> ", pizza.base);
   return (
     <S.Wrapper
       variants={containerVariants}
@@ -37,19 +39,29 @@ export function BaseTemplate({ addBase, pizza }) {
     >
       <S.Title>Step 1: Choose Your Base</S.Title>
       <ul>
-        {bases.map((base) => {
-          let spanClass = pizza.base === base ? "active" : "";
-          return (
-            <S.Item
-              key={base}
-              onClick={() => addBase(base)}
-              whileHover={{ scale: 1.3, originX: 0, color: "#f8e112" }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <S.ItemDetail active={pizza.base === base}>{base}</S.ItemDetail>
-            </S.Item>
-          );
-        })}
+        <AnimateSharedLayout>
+          {bases.map((base, index) => {
+            return (
+              <S.Item
+                key={index}
+                onClick={() => addBase(base)}
+                whileHover={{ scale: 1.3, originX: 0, color: "#f8e112" }}
+                transition={{ type: "spring", stiffness: 120 }}
+              >
+                {pizza.base === base && (
+                  <motion.span
+                    layoutId="selector"
+                    style={{ marginRight: "6px" }}
+                  >
+                    {">"}
+                  </motion.span>
+                )}
+
+                <S.ItemDetail layout>{base}</S.ItemDetail>
+              </S.Item>
+            );
+          })}
+        </AnimateSharedLayout>
       </ul>
 
       {pizza.base && (

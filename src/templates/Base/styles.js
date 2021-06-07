@@ -15,9 +15,10 @@ export const Title = styled.h3`
 export const Item = styled(motion.li)`
   padding: 10px;
   cursor: pointer;
+  display: flex;
 `;
 
-export const ItemDetail = styled.span`
+export const ItemDetail = styled(motion.span)`
   ${({ active }) => css`
     ${active &&
     css`
