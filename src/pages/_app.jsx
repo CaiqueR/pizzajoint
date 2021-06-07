@@ -3,6 +3,7 @@ import { useState } from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { Header } from "../components/Header";
 import { Modal } from "../components/Modal";
+import Head from "next/head";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -52,6 +53,10 @@ function MyApp({ Component, pageProps, router }) {
 
   return (
     <ThemeProvider theme={theme}>
+      <Head>
+        <title>Pizza Joint</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <link rel="preconnect" href="https://fonts.gstatic.com" />
       <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap"
