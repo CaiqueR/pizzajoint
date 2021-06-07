@@ -1,18 +1,19 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { Button } from "../../components/Button";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(motion.div)`
   margin: 100px auto 40px;
   text-align: center;
   max-width: 800px;
 `;
 
-export const Title = styled.h2`
+export const Title = styled(motion.h2)`
   font-size: 2em;
   margin-bottom: 30px;
 `;
 
-export const HomeButton = styled.button`
+export const HomeButton = styled(motion.button)`
   color: white;
   padding: 10px 30px;
   font-size: 1em;

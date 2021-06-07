@@ -1,6 +1,7 @@
+import { motion } from "framer-motion";
 import styled, { css } from "styled-components";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(motion.div)`
   max-width: 300px;
   margin: 100px auto 40px;
 `;
@@ -11,7 +12,7 @@ export const Title = styled.h3`
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 `;
 
-export const Item = styled.li`
+export const Item = styled(motion.li)`
   padding: 10px;
   cursor: pointer;
 `;

@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 export const Wrapper = styled.header`
@@ -7,6 +8,7 @@ export const Wrapper = styled.header`
 `;
 
 export const Logo = styled.svg`
+  cursor: pointer;
   width: 80px;
   overflow: visible;
   stroke: #fff;
@@ -15,7 +17,7 @@ export const Logo = styled.svg`
   stroke-linecap: round;
 `;
 
-export const TitteWrapper = styled.div`
+export const TitteWrapper = styled(motion.div)`
   flex-grow: 1;
   margin-left: 20px;
   font-size: 0.6em;

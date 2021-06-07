@@ -1,6 +1,8 @@
+import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { Header } from "../components/Header";
+import { Modal } from "../components/Modal";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -28,8 +30,9 @@ const theme = {
   },
 };
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, router }) {
   const [pizza, setPizza] = useState({ base: "", toppings: [] });
+  const [showModal, setShowModal] = useState(false);
 
   const addBase = (base) => {
     setPizza({ ...pizza, base });
@@ -45,21 +48,25 @@ function MyApp({ Component, pageProps }) {
     setPizza({ ...pizza, toppings: newToppings });
   };
 
-  const final = { ...pageProps, addBase, addTopping, pizza };
+  const final = { ...pageProps, addBase, addTopping, pizza, setShowModal };
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap"
-          rel="stylesheet"
-        />
-        <GlobalStyle />
-        <Header />
-        <Component {...final} />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <link rel="preconnect" href="https://fonts.gstatic.com" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap"
+        rel="stylesheet"
+      />
+      <GlobalStyle />
+      <Header />
+      <Modal showModal={showModal} setShowModal={setShowModal} />
+      <AnimatePresence
+        exitBeforeEnter
+        onExitComplete={() => setShowModal(false)}
+      >
+        <Component {...final} key={router.route} />
+      </AnimatePresence>
+    </ThemeProvider>
   );
 }
 
